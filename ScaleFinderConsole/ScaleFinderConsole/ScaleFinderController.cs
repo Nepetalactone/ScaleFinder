@@ -126,7 +126,7 @@ namespace ScaleFinderConsole
 
             foreach (Note note in chord.Notes)
             {
-                noteList.Add(note.ToString());
+                noteList.Add(note.ToStringManual());
             }
 
             return noteList.ToArray();
@@ -137,7 +137,7 @@ namespace ScaleFinderConsole
             List<String> noteList = new List<string>();
             foreach (Note note in Enum.GetValues(typeof (Note)))
             {
-                noteList.Add(note.ToString());
+                noteList.Add(note.ToStringManual());
             }
             return noteList.ToArray();
         }
@@ -155,7 +155,7 @@ namespace ScaleFinderConsole
 
             foreach (Note note in scale.Notes)
             {
-                noteList.Add(note.ToString());
+                noteList.Add(note.ToStringManual());
             }
             return noteList.ToArray();
         }

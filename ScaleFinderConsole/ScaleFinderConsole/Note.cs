@@ -24,7 +24,7 @@ namespace ScaleFinderConsole
 
     public static class Extensions
     {
-        public static String ToString(this Note note)
+        public static String ToStringManual(this Note note)
         {
             switch (note)
             {

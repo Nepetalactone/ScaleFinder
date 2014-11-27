@@ -25,7 +25,7 @@ namespace ScaleFinderConsole
         public List<Note> Notes { get; protected set; }
         public String Name { get; private set; }
 
-        public NoteSet(String pattern, String name)
+        protected NoteSet(String pattern, String name)
         {
             Notes = GetNotesFromPattern(pattern);
             Intervals = GetIntervalsFromNotes(Notes);
