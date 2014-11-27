@@ -9,21 +9,32 @@ namespace ScaleFinderConsole
     class Scale
     {
         public short[] Intervals { get; private set; }
-        public Tone Key { get; private set; }
+        private Note _key;
+        public Note Key
+        {
+            get { return _key; }
+            set
+            {
+                _key = value;
+                GetNotesFromIntervals();
+            }
+        }
 
-        private readonly List<Tone> _notes; 
+        public List<Note> Notes { get; private set; }
 
-        public Scale(short[] intervals, Tone key)
+        public String Name { get; private set; }
+
+        public Scale(short[] intervals, String name)
         {
             Intervals = intervals;
-            Key = key;
-            _notes = new List<Tone>();
+            Name = name;
+            Notes = new List<Note>();
             GetNotesFromIntervals();
         }
 
         private void GetNotesFromIntervals()
         {
-            _notes.Add(Key);
+            Notes.Add(Key);
             short curTone = (short) Key;
 
             foreach (short interval in Intervals)
@@ -34,15 +45,15 @@ namespace ScaleFinderConsole
                     curTone -= 12;
                 }
 
-                _notes.Add((Tone)curTone);
+                Notes.Add((Note)curTone);
             }
         }
 
         public bool IsChordInScale(Chord chord)
         {
-            foreach (Tone tone in chord.Notes)
+            foreach (Note tone in chord.Notes)
             {
-                if (!_notes.Contains(tone))
+                if (!Notes.Contains(tone))
                 {
                     return false;
                 }

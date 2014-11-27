@@ -9,21 +9,33 @@ namespace ScaleFinderConsole
     class Chord
     {
         public short[] Intervals { get; private set; }
-        public Tone Key { get; set; }
+        private Note _rootNote;
 
-        public List<Tone> Notes { get; private set; }
+        public Note RootNote
+        {
+            get { return _rootNote; }
+            set
+            {
+                _rootNote = value;
+                GetNotesFromIntervals();
+            }
+        }
 
-        public Chord(short[] intervals, Tone key)
+        public List<Note> Notes { get; private set; }
+
+        public String  Name { get; private set; }
+
+        public Chord(short[] intervals, String name)
         {
             Intervals = intervals;
-            Key = key;
-            Notes = new List<Tone>();
+            Name = name;
         }
 
         private void GetNotesFromIntervals()
         {
-            Notes.Add(Key);
-            short curTone = (short)Key;
+            Notes = new List<Note>();
+            Notes.Add(RootNote);
+            short curTone = (short)RootNote;
 
             foreach (short interval in Intervals)
             {
@@ -33,7 +45,8 @@ namespace ScaleFinderConsole
                     curTone -= 12;
                 }
 
-                Notes.Add((Tone)curTone);
+                Notes.Add((Note)curTone);
+                curTone = (short)RootNote;
             }
         }
     }

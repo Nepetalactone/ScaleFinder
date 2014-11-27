@@ -45,7 +45,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scale.cs" />
-    <Compile Include="Tone.cs" />
+    <Compile Include="Note.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
