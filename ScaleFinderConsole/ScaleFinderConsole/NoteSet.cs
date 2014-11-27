@@ -9,7 +9,6 @@ namespace ScaleFinderConsole
     abstract class NoteSet
     {
         public short[] Intervals { get; protected set; }
-
         private Tone _key;
         public Tone Key
         {
@@ -24,11 +23,13 @@ namespace ScaleFinderConsole
             }
         }
         public List<Tone> Notes { get; protected set; }
+        public String Name { get; private set; }
 
-        public NoteSet(String pattern)
+        public NoteSet(String pattern, String name)
         {
             Notes = GetNotesFromPattern(pattern);
             Intervals = GetIntervalsFromNotes(Notes);
+            Name = name;
         }
 
         protected List<Tone> GetNotesFromPattern(string pattern)

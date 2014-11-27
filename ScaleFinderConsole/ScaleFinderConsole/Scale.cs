@@ -8,7 +8,7 @@ namespace ScaleFinderConsole
 {
     class Scale : NoteSet
     {
-        public Scale(String pattern):base(pattern)
+        public Scale(String pattern, String name):base(pattern, name)
         {
         }
         public bool IsChordInScale(Chord chord)

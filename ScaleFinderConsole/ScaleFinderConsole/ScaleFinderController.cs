@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace ScaleFinderConsole
 {
-    class Chord : NoteSet
+    class ScaleFinderController
     {
-        public Chord(String pattern, String name):base(pattern, name)
+        private readonly Scale[] scales;
+        private readonly Chord[] chords;
+
+        public ScaleFinderController()
         {
         }
     }
