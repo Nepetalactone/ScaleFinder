@@ -86,7 +86,7 @@ namespace ScaleFinderConsole
             };
         }
 
-        public String[] GetScales()
+        public String[] GetScaleNames()
         {
             List<String> scaleNameList = new List<string>();
             foreach (Scale scale in _scales)
@@ -119,7 +119,45 @@ namespace ScaleFinderConsole
 
         public String[] GetChordNotes(String chordName)
         {
-            return Enum.GetNames(typeof(Note));
+            List<String> noteList = new List<string>();
+            Chord chord = (from tempChord in _chords
+                where tempChord.Name.Equals(chordName)
+                select tempChord).FirstOrDefault();
+
+            foreach (Note note in chord.Notes)
+            {
+                noteList.Add(note.ToString());
+            }
+
+            return noteList.ToArray();
+        }
+
+        public String[] GetNotes()
+        {
+            List<String> noteList = new List<string>();
+            foreach (Note note in Enum.GetValues(typeof (Note)))
+            {
+                noteList.Add(note.ToString());
+            }
+            return noteList.ToArray();
+        }
+
+        public String[] GetScaleNotes(String scaleName, String keyString)
+        {
+            List<String> noteList = new List<string>();
+            Scale scale = (from tempScale in _scales
+                where tempScale.Name.Equals(scaleName)
+                select tempScale).FirstOrDefault();
+
+            Note key;
+            Enum.TryParse(keyString, out key);
+            scale.Key = key;
+
+            foreach (Note note in scale.Notes)
+            {
+                noteList.Add(note.ToString());
+            }
+            return noteList.ToArray();
         }
     }
 }
