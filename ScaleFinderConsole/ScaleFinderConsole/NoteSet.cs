@@ -9,7 +9,20 @@ namespace ScaleFinderConsole
     abstract class NoteSet
     {
         public short[] Intervals { get; protected set; }
-        public Tone Key { get; set; }
+
+        private Tone _key;
+        public Tone Key
+        {
+            get
+            { 
+                return _key; 
+            }
+            set
+            {
+                _key = value;
+                Notes = GetNotesFromIntervals(Intervals);
+            }
+        }
         public List<Tone> Notes { get; protected set; }
 
         public NoteSet(String pattern)
@@ -22,7 +35,7 @@ namespace ScaleFinderConsole
         {
             int i = 0;
             List<Tone> notes = new List<Tone>();
-            foreach (char c in pattern.Reverse())
+            foreach (char c in pattern)
             {
                 if (c.Equals('1'))
                 {

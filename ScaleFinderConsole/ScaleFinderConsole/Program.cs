@@ -77,6 +77,11 @@ namespace ScaleFinderConsole
             Chord MajorSeventhAugmentedFifthChord = new Chord("100010001001");
             Chord SeventhSuspendedFourthChord = new Chord("10000101001");
             Chord SeventhSuspendedFourthAugmentedFifthChord = new Chord("10000100101");
+
+            Console.WriteLine(MajorScale.IsChordInScale(MajorChord));
+            MajorChord.Key = Tone.CSharp;
+            Console.WriteLine(MajorScale.IsChordInScale(MajorChord));
+            Console.ReadKey();
         }
     }
 }
