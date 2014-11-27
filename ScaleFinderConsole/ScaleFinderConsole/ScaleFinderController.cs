@@ -144,6 +144,9 @@ namespace ScaleFinderConsole
 
         public String[] GetScaleNotes(String scaleName, String keyString)
         {
+
+            keyString = keyString.Replace("#", "Sharp");
+
             List<String> noteList = new List<string>();
             Scale scale = (from tempScale in _scales
                 where tempScale.Name.Equals(scaleName)

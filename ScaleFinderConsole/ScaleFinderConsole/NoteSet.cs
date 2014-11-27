@@ -8,7 +8,7 @@ namespace ScaleFinderConsole
 {
     abstract class NoteSet
     {
-        public short[] Intervals { get; protected set; }
+        private readonly String _pattern;
         private Note _key;
         public Note Key
         {
@@ -19,7 +19,7 @@ namespace ScaleFinderConsole
             set
             {
                 _key = value;
-                Notes = GetNotesFromIntervals(Intervals);
+                Notes = GetNotesFromPattern(_pattern);
             }
         }
         public List<Note> Notes { get; protected set; }
@@ -27,14 +27,14 @@ namespace ScaleFinderConsole
 
         protected NoteSet(String pattern, String name)
         {
+            _pattern = pattern;
             Notes = GetNotesFromPattern(pattern);
-            Intervals = GetIntervalsFromNotes(Notes);
             Name = name;
         }
 
         protected List<Note> GetNotesFromPattern(string pattern)
         {
-            int i = 0;
+            int i = (int)_key;
             List<Note> notes = new List<Note>();
             foreach (char c in pattern)
             {
@@ -48,42 +48,11 @@ namespace ScaleFinderConsole
                 { }
 
                 i++;
-            }
 
-            return notes;
-        }
-        protected short[] GetIntervalsFromNotes(List<Note> notes)
-        {
-            short i = 1;
-            List<short> intervalList = new List<short>();
-            foreach (Note t in Enum.GetValues(typeof(Note)))
-            {
-                if (notes.Contains(t))
+                if (i == 11)
                 {
-                    intervalList.Add(i);
+                    i = 0;
                 }
-                else
-                {
-                    i++;
-                }
-            }
-            return intervalList.ToArray();
-        }
-        protected List<Note> GetNotesFromIntervals(short[] intervals)
-        {
-            List<Note> notes = new List<Note>();
-            notes.Add(Key);
-            short curNote = (short)Key;
-
-            foreach (short interval in intervals)
-            {
-                curNote += interval;
-                if (curNote >= 12)
-                {
-                    curNote -= 12;
-                }
-
-                notes.Add((Note)curNote);
             }
 
             return notes;
