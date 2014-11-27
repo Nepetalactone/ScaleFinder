@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScaleFinderConsole
 {
-    class ScaleFinderController
+    public class ScaleFinderController
     {
         private readonly Scale[] scales;
         private readonly Chord[] chords;
@@ -96,12 +96,16 @@ namespace ScaleFinderConsole
             return scaleNameList.ToArray();
         }
 
-        public String[] GetPossibleChordsInScale(String scaleName)
+        public String[] GetPossibleChordsInScale(String scaleName, String keyString)
         {
             List<String> possibleChords = new List<string>();
             Scale scale = (from tempScale in scales
                         where tempScale.Name.Equals(scaleName)
                         select tempScale).FirstOrDefault();
+
+            Tone key;
+            Enum.TryParse(keyString, out key);
+            scale.Key = key;
 
             foreach (Chord chord in chords)
             {
