@@ -8,12 +8,12 @@ namespace ScaleFinderConsole
 {
     public class ScaleFinderController
     {
-        private readonly Scale[] scales;
-        private readonly Chord[] chords;
+        private readonly Scale[] _scales;
+        private readonly Chord[] _chords;
 
         public ScaleFinderController()
         {
-            scales = new Scale[]{
+            _scales = new Scale[]{
                 new Scale("101011010101", "Major"),
                 new Scale("101101011010", "Natural Minor"),
                 new Scale("101101011001", "Harmonic Minor"),
@@ -62,7 +62,7 @@ namespace ScaleFinderConsole
                 new Scale("101001010110", "Dominant 7th")
             };
 
-            chords = new Chord[]{
+            _chords = new Chord[]{
                 new Chord("10001001", "Major"),
                 new Chord("10010001", "Minor"),
                 new Chord("100010001", "Augmented"),
@@ -89,7 +89,7 @@ namespace ScaleFinderConsole
         public String[] GetScales()
         {
             List<String> scaleNameList = new List<string>();
-            foreach (Scale scale in scales)
+            foreach (Scale scale in _scales)
             {
                 scaleNameList.Add(scale.Name);
             }
@@ -99,15 +99,15 @@ namespace ScaleFinderConsole
         public String[] GetPossibleChordsInScale(String scaleName, String keyString)
         {
             List<String> possibleChords = new List<string>();
-            Scale scale = (from tempScale in scales
+            Scale scale = (from tempScale in _scales
                         where tempScale.Name.Equals(scaleName)
                         select tempScale).FirstOrDefault();
 
-            Tone key;
+            Note key;
             Enum.TryParse(keyString, out key);
             scale.Key = key;
 
-            foreach (Chord chord in chords)
+            foreach (Chord chord in _chords)
             {
                 if (scale.IsChordInScale(chord))
                 {
@@ -119,7 +119,7 @@ namespace ScaleFinderConsole
 
         public String[] GetChordNotes(String chordName)
         {
-            return Enum.GetNames(typeof(Tone));
+            return Enum.GetNames(typeof(Note));
         }
     }
 }

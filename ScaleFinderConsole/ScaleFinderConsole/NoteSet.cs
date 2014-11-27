@@ -9,8 +9,8 @@ namespace ScaleFinderConsole
     abstract class NoteSet
     {
         public short[] Intervals { get; protected set; }
-        private Tone _key;
-        public Tone Key
+        private Note _key;
+        public Note Key
         {
             get
             { 
@@ -22,7 +22,7 @@ namespace ScaleFinderConsole
                 Notes = GetNotesFromIntervals(Intervals);
             }
         }
-        public List<Tone> Notes { get; protected set; }
+        public List<Note> Notes { get; protected set; }
         public String Name { get; private set; }
 
         public NoteSet(String pattern, String name)
@@ -32,15 +32,15 @@ namespace ScaleFinderConsole
             Name = name;
         }
 
-        protected List<Tone> GetNotesFromPattern(string pattern)
+        protected List<Note> GetNotesFromPattern(string pattern)
         {
             int i = 0;
-            List<Tone> notes = new List<Tone>();
+            List<Note> notes = new List<Note>();
             foreach (char c in pattern)
             {
                 if (c.Equals('1'))
                 {
-                    Tone x;
+                    Note x;
                     Enum.TryParse(i.ToString(), out x);
                     notes.Add(x);
                 }
@@ -52,11 +52,11 @@ namespace ScaleFinderConsole
 
             return notes;
         }
-        protected short[] GetIntervalsFromNotes(List<Tone> notes)
+        protected short[] GetIntervalsFromNotes(List<Note> notes)
         {
             short i = 1;
             List<short> intervalList = new List<short>();
-            foreach (Tone t in Enum.GetValues(typeof(Tone)))
+            foreach (Note t in Enum.GetValues(typeof(Note)))
             {
                 if (notes.Contains(t))
                 {
@@ -69,21 +69,21 @@ namespace ScaleFinderConsole
             }
             return intervalList.ToArray();
         }
-        protected List<Tone> GetNotesFromIntervals(short[] intervals)
+        protected List<Note> GetNotesFromIntervals(short[] intervals)
         {
-            List<Tone> notes = new List<Tone>();
+            List<Note> notes = new List<Note>();
             notes.Add(Key);
-            short curTone = (short)Key;
+            short curNote = (short)Key;
 
             foreach (short interval in intervals)
             {
-                curTone += interval;
-                if (curTone >= 12)
+                curNote += interval;
+                if (curNote >= 12)
                 {
-                    curTone -= 12;
+                    curNote -= 12;
                 }
 
-                notes.Add((Tone)curTone);
+                notes.Add((Note)curNote);
             }
 
             return notes;

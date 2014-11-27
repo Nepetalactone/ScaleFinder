@@ -13,9 +13,9 @@ namespace ScaleFinderConsole
         }
         public bool IsChordInScale(Chord chord)
         {
-            foreach (Tone tone in chord.Notes)
+            foreach (Note note in chord.Notes)
             {
-                if (!Notes.Contains(tone))
+                if (!Notes.Contains(note))
                 {
                     return false;
                 }
