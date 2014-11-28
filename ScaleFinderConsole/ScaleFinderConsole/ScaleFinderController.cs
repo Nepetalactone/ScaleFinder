@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -96,16 +97,35 @@ namespace ScaleFinderConsole
             return scaleNameList.ToArray();
         }
 
-        public Tuple<string, string>[] GetPossibleChordsInScale(String scaleName, String keyString)
+        public List<String>[] GetPossibleChordsInScale(String scaleName, String keyString)
         {
-            List<Tuple<string, string>> possibleChords = new List<Tuple<string, string>>();
+            List<String>[] possibleChords = new List<String>[7];
+
+            for (int i = 0; i < 7; i++)
+            {
+                possibleChords[i] = new List<string>();
+            }
+
             Scale scale = (from tempScale in _scales
-                        where tempScale.Name.Equals(scaleName)
-                        select tempScale).FirstOrDefault();
+                           where tempScale.Name.Equals(scaleName)
+                           select tempScale).FirstOrDefault();
 
             Note key;
             Enum.TryParse(keyString, out key);
             scale.Key = key;
+
+            Dictionary<Note, int> noteIndex = new Dictionary<Note, int>();
+            int j = 0;
+            foreach (Note note in scale.Notes)
+            {
+                if (!noteIndex.ContainsKey(note))
+                {
+                    noteIndex.Add(note, j);
+                    j++;
+                }
+                
+            }
+
 
             foreach (Chord chord in _chords)
             {
@@ -114,11 +134,11 @@ namespace ScaleFinderConsole
                     chord.Key = chordKey;
                     if (scale.IsChordInScale(chord))
                     {
-                        possibleChords.Add(new Tuple<string, string>(chord.Key.ToStringManual(), chord.ShortName));
+                        possibleChords[noteIndex[chordKey]].Add(chord.Key.ToStringManual() + chord.ShortName);
                     }
                 }
             }
-            return possibleChords.ToArray();
+            return possibleChords;
         }
 
         public String[] GetChordNotes(String chordName)
