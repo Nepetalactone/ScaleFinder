@@ -96,9 +96,9 @@ namespace ScaleFinderConsole
             return scaleNameList.ToArray();
         }
 
-        public String[] GetPossibleChordsInScale(String scaleName, String keyString)
+        public Tuple<string, string>[] GetPossibleChordsInScale(String scaleName, String keyString)
         {
-            List<String> possibleChords = new List<string>();
+            List<Tuple<string, string>> possibleChords = new List<Tuple<string, string>>();
             Scale scale = (from tempScale in _scales
                         where tempScale.Name.Equals(scaleName)
                         select tempScale).FirstOrDefault();
@@ -109,9 +109,13 @@ namespace ScaleFinderConsole
 
             foreach (Chord chord in _chords)
             {
-                if (scale.IsChordInScale(chord))
+                foreach (Note chordKey in Enum.GetValues(typeof(Note)))
                 {
-                    possibleChords.Add(chord.ShortName);
+                    chord.Key = chordKey;
+                    if (scale.IsChordInScale(chord))
+                    {
+                        possibleChords.Add(new Tuple<string, string>(chord.Key.ToStringManual(), chord.ShortName));
+                    }
                 }
             }
             return possibleChords.ToArray();
