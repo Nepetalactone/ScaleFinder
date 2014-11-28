@@ -63,26 +63,26 @@ namespace ScaleFinderConsole
             };
 
             _chords = new Chord[]{
-                new Chord("10001001", "Major"),
-                new Chord("10010001", "Minor"),
-                new Chord("100010001", "Augmented"),
-                new Chord("1001001", "Diminished"),
-                new Chord("10100001", "Suspended"),
-                new Chord("10000101", "Suspended"),
-                new Chord("1000100101", "Sixth"),
-                new Chord("1001000101", "Minor Sixth"),
-                new Chord("10001001001", "Seventh"),
-                new Chord("100010010001", "Major Seventh"),
-                new Chord("10010001001", "Minor Seventh"),
-                new Chord("100100010001", "Minor Major Seventh"),
-                new Chord("1001001001", "Diminished Seventh"),
-                new Chord("10010010001", "Half Diminished"),
-                new Chord("10001010001", "Seventh Diminished Fifth"),
-                new Chord("10001000101", "Seventh Augmented Fifth"),
-                new Chord("100010100001", "Major Seventh Diminished Fifth"),
-                new Chord("100010001001", "Major Seventh Augmented Fifth"),
-                new Chord("10000101001", "Seventh Suspended Fourth"),
-                new Chord("10000100101", "Seventh Suspended Fourth Augmented Fifth")
+                new Chord("10001001", "Major", "Maj"),
+                new Chord("10010001", "Minor", "Min"),
+                new Chord("100010001", "Augmented", "Aug"),
+                new Chord("1001001", "Diminished", "Dim"),
+                new Chord("10100001", "Suspended Second", "Sus2"),
+                new Chord("10000101", "Suspended Fourth", "Sus4"),
+                new Chord("1000100101", "Sixth", "6"),
+                new Chord("1001000101", "Minor Sixth", "min6"),
+                new Chord("10001001001", "Seventh", "7"),
+                new Chord("100010010001", "Major Seventh", "maj7"),
+                new Chord("10010001001", "Minor Seventh", "min7"),
+                new Chord("100100010001", "Minor Major Seventh", "minMaj7"),
+                new Chord("1001001001", "Diminished Seventh", "dim7"),
+                new Chord("10010010001", "Half Diminished", "min7b5"),
+                new Chord("10001010001", "Seventh Diminished Fifth", "7b5"),
+                new Chord("10001000101", "Seventh Augmented Fifth", "7#5"),
+                new Chord("100010100001", "Major Seventh Diminished Fifth", "maj7b5"),
+                new Chord("100010001001", "Major Seventh Augmented Fifth", "maj7#5"),
+                new Chord("10000101001", "Seventh Suspended Fourth", "7Sus4"),
+                new Chord("10000100101", "Seventh Suspended Fourth Augmented Fifth", "7sus4#5")
             };
         }
 
@@ -111,7 +111,7 @@ namespace ScaleFinderConsole
             {
                 if (scale.IsChordInScale(chord))
                 {
-                    possibleChords.Add(chord.Name);
+                    possibleChords.Add(chord.ShortName);
                 }
             }
             return possibleChords.ToArray();

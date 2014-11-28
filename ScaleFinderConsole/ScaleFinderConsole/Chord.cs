@@ -8,8 +8,10 @@ namespace ScaleFinderConsole
 {
     class Chord : NoteSet
     {
-        public Chord(String pattern, String name):base(pattern, name)
+        public String ShortName { get; private set; }
+        public Chord(String pattern, String name, String shortName):base(pattern, name)
         {
+            ShortName = shortName;
         }
     }
 }
