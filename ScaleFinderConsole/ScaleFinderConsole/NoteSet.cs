@@ -49,7 +49,7 @@ namespace ScaleFinderConsole
 
                 i++;
 
-                if (i == 11)
+                if (i > 11)
                 {
                     i = 0;
                 }
