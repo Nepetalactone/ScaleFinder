@@ -20,7 +20,7 @@ namespace ScaleFinderConsole
                 new Scale("101101011001", "Harmonic Minor"),
                 new Scale("101101010101", "Melodic Minor"),
                 new Scale("101001010100", "Pentatonic Major"),
-                new Scale("100101010010", "PentatonicMinor"),
+                new Scale("100101010010", "Pentatonic Minor"),
                 new Scale("100101110010", "Pentatonic Blues"),
                 new Scale("101001010010", "Pentatonic Neutral"),
                 new Scale("101011010101", "Ionian"),
@@ -85,6 +85,8 @@ namespace ScaleFinderConsole
                 new Chord("10000101001", "Seventh Suspended Fourth", "7sus4"),
                 new Chord("10000100101", "Seventh Suspended Fourth Augmented Fifth", "7sus4#5")
             };
+
+            Array.Sort(_scales, (x, y) => string.Compare(x.Name, y.Name));
         }
 
         public String[] GetScaleNames()
