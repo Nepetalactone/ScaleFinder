@@ -101,9 +101,9 @@ namespace ScaleFinderConsole
 
         public List<String>[] GetPossibleChordsInScale(String scaleName, String keyString)
         {
-            List<String>[] possibleChords = new List<String>[7];
+            List<String>[] possibleChords = new List<String>[8];
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 8; i++)
             {
                 possibleChords[i] = new List<string>();
             }
