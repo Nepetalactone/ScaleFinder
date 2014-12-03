@@ -101,9 +101,9 @@ namespace ScaleFinderConsole
 
         public List<String>[] GetPossibleChordsInScale(String scaleName, String keyString)
         {
-            List<String>[] possibleChords = new List<String>[8];
+            List<String>[] possibleChords = new List<String>[7];
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 7; i++)
             {
                 possibleChords[i] = new List<string>();
             }
@@ -136,7 +136,10 @@ namespace ScaleFinderConsole
                     chord.Key = chordKey;
                     if (scale.IsChordInScale(chord))
                     {
-                        possibleChords[noteIndex[chordKey]].Add(chord.Key.ToStringManual() + chord.ShortName);
+                        if (noteIndex[chordKey] <= possibleChords.Length - 1)
+                        {
+                            possibleChords[noteIndex[chordKey]].Add(chord.Key.ToStringManual() + chord.ShortName);
+                        }
                     }
                 }
             }
