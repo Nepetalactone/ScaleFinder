@@ -101,6 +101,7 @@ namespace ScaleFinderConsole
 
         public List<String>[] GetPossibleChordsInScale(String scaleName, String keyString)
         {
+            keyString = keyString.Replace("#", "Sharp");
             List<String>[] possibleChords = new List<String>[7];
 
             for (int i = 0; i < 7; i++)
@@ -111,10 +112,8 @@ namespace ScaleFinderConsole
             Scale scale = (from tempScale in _scales
                            where tempScale.Name.Equals(scaleName)
                            select tempScale).FirstOrDefault();
-
-            keyString = keyString.Replace("#", "Sharp");
-            Note key = (Note)Enum.Parse(typeof (Note), keyString);
-            scale.Key = key;
+            
+            scale.Key = (Note)Enum.Parse(typeof (Note), keyString);
 
             Dictionary<Note, int> noteIndex = new Dictionary<Note, int>();
             int j = 0;
@@ -125,9 +124,7 @@ namespace ScaleFinderConsole
                     noteIndex.Add(note, j);
                     j++;
                 }
-                
             }
-
 
             foreach (Chord chord in _chords)
             {
@@ -148,16 +145,14 @@ namespace ScaleFinderConsole
 
         public String[] GetChordNotes(String keyString, String chordName)
         {
+            keyString = keyString.Replace("#", "Sharp");
             List<String> noteList = new List<string>();
             Chord chord = (from tempChord in _chords
                 where tempChord.Name.Equals(chordName) ||
                 tempChord.ShortName.Equals(chordName)
                 select tempChord).FirstOrDefault();
 
-            Note key;
-            Enum.TryParse(keyString, out key);
-            chord.Key = key;
-
+            chord.Key = (Note) Enum.Parse(typeof (Note), keyString);
             foreach (Note note in chord.Notes)
             {
                 noteList.Add(note.ToStringManual());
@@ -178,7 +173,6 @@ namespace ScaleFinderConsole
 
         public String[] GetScaleNotes(String scaleName, String keyString)
         {
-
             keyString = keyString.Replace("#", "Sharp");
 
             List<String> noteList = new List<string>();
@@ -186,9 +180,7 @@ namespace ScaleFinderConsole
                 where tempScale.Name.Equals(scaleName)
                 select tempScale).FirstOrDefault();
 
-            Note key;
-            Enum.TryParse(keyString, out key);
-            scale.Key = key;
+            scale.Key = (Note)Enum.Parse(typeof (Note), keyString);
 
             foreach (Note note in scale.Notes)
             {
