@@ -112,10 +112,7 @@ namespace ScaleFinderConsole
                            where tempScale.Name.Equals(scaleName)
                            select tempScale).FirstOrDefault();
 
-            if (keyString.EndsWith("#"))
-            {
-                keyString = keyString[0] + "Sharp";
-            }
+            keyString = keyString.Replace("#", "Sharp");
             Note key = (Note)Enum.Parse(typeof (Note), keyString);
             scale.Key = key;
 
