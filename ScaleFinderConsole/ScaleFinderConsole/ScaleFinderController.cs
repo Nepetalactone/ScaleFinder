@@ -112,8 +112,11 @@ namespace ScaleFinderConsole
                            where tempScale.Name.Equals(scaleName)
                            select tempScale).FirstOrDefault();
 
-            Note key;
-            Enum.TryParse(keyString, out key);
+            if (keyString.EndsWith("#"))
+            {
+                keyString = keyString[0] + "Sharp";
+            }
+            Note key = (Note)Enum.Parse(typeof (Note), keyString);
             scale.Key = key;
 
             Dictionary<Note, int> noteIndex = new Dictionary<Note, int>();
